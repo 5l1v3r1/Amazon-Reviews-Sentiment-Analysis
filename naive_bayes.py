@@ -1,5 +1,4 @@
 import math
-from ctypes import c_char_p
 
 import pandas as pd
 import re
@@ -48,43 +47,51 @@ def cleanup_data(data_chunk):
             print multiprocessing.current_process(), " ", i
 
 
-processes = []
-nprocs = 8
-chunksize = int(math.ceil(dataset.shape[0] / float(nprocs)))
-for p in range(nprocs):
-    chunk = dataset.iloc[(chunksize * p): (chunksize * (p + 1))]
-    process = multiprocessing.Process(target=cleanup_data, args=(chunk,))
-    processes.append(process)
-    process.start()
+# clean the data with 8 processes
+def cleanup_data_mp():
+    processes = []
+    nprocs = 8
+    chunksize = int(math.ceil(dataset.shape[0] / float(nprocs)))
+    for p in range(nprocs):
+        chunk = dataset.iloc[(chunksize * p): (chunksize * (p + 1))]
+        process = multiprocessing.Process(target=cleanup_data, args=(chunk,))
+        processes.append(process)
+        process.start()
 
-for process in processes:
-    process.join()
+    for process in processes:
+        process.join()
 
-print len(data)
 
-# creating the feature matrix
-matrix = CountVectorizer(max_features=1000)
-X = matrix.fit_transform(data).toarray()
-dataset.ix[:, 3] = dataset.ix[:, 3].apply(pd.to_numeric)
-y = dataset.iloc[:, 3]
+def run_naive_bayes():
+    # creating the feature matrix
+    matrix = CountVectorizer(max_features=1000)
+    X = matrix.fit_transform(data).toarray()
+    dataset.ix[:, 3] = dataset.ix[:, 3].apply(pd.to_numeric)
+    y = dataset.iloc[:, 3]
 
-# split train and test data
+    # split train and test data
 
-X_train, X_test, y_train, y_test = train_test_split(X, y)
+    X_train, X_test, y_train, y_test = train_test_split(X, y)
 
-# Naive Bayes
-classifier = GaussianNB()
-classifier.fit(X_train, y_train)
+    # Naive Bayes
+    classifier = GaussianNB()
+    classifier.fit(X_train, y_train)
 
-# predict class
-y_pred = classifier.predict(X_test)
+    # predict class
+    y_pred = classifier.predict(X_test)
 
-# Confusion matrix
+    # Confusion matrix
 
-cm = confusion_matrix(y_test, y_pred)
-print cm
-cr = classification_report(y_test, y_pred)
-print cr
+    cm = confusion_matrix(y_test, y_pred)
+    print cm
+    cr = classification_report(y_test, y_pred)
+    print cr
 
-accuracy = accuracy_score(y_test, y_pred)
-print accuracy
+    accuracy = accuracy_score(y_test, y_pred)
+    print accuracy
+
+
+if __name__ == '__main__':
+    multiprocessing.freeze_support()
+    cleanup_data_mp()
+    run_naive_bayes()
