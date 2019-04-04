@@ -47,4 +47,4 @@ def write_list_to_csv(filename, rlist):
         writer = csv.writer(traing_file, delimiter=';', quotechar='|', quoting=csv.QUOTE_ALL)
         for review in rlist:
             writer.writerow([review.product_id, review.user_id, review.helpfulness, review.score, review.time,
-                                 review.summary, review.text])
+                             review.summary, review.text])

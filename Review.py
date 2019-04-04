@@ -4,6 +4,12 @@ from nltk.corpus import stopwords
 
 class Review:
 
+    """
+    summary -> holds a dictionary of words with number of occurrence of each of them in summary field of dataset
+        i.e {'ever': 1, 'best': 1}
+    text -> holds a dictionary of words with number of occurrence of each of them in text field of dataset
+        i.e {'made': 1, 'far': 1, 'brand': 2, 'chocolate': 1, 'dark': 1, '.': 2, 'best': 2, 'fact': 1}
+    """
     def __init__(self, product_id, user_id, helpfulness, score, time, summary, text):
         self.product_id = product_id
         self.user_id = user_id
@@ -11,7 +17,7 @@ class Review:
         self.score = score
         self.time = time
         self.summary = summary
-        self.text = summary
+        self.text = text
 
     ''' don't need to call remove_stop_words because test and train files are already generated
     Uploading just for backup.'''
