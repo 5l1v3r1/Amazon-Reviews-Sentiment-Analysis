@@ -16,8 +16,8 @@ def read_file(filename, rlist):
 
 
 if __name__ == '__main__':
-    read_file("train.csv", train_list)
-    read_file("test.csv", test_list)
+    read_file("dataset/train.csv", train_list)
+    read_file("dataset/test.csv", test_list)
 
     print len(train_list)
     print len(test_list)
