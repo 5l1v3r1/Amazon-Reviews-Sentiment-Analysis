@@ -10,9 +10,11 @@ class Review:
         self.helpfulness = helpfulness
         self.score = score
         self.time = time
-        self.summary = self.remove_stop_words(summary)
-        self.text = self.remove_stop_words(text)
+        self.summary = summary
+        self.text = summary
 
+    ''' don't need to call remove_stop_words because test and train files are already generated
+    Uploading just for backup.'''
     @staticmethod
     def remove_stop_words(text):
         # list of all stop words
