@@ -33,12 +33,12 @@ def run_naive_bayes():
     # Confusion matrix
 
     cm = confusion_matrix(y_test, y_pred)
-    print cm
+    print(cm)
     cr = classification_report(y_test, y_pred)
-    print cr
+    print(cr)
 
     accuracy = accuracy_score(y_test, y_pred)
-    print accuracy
+    print(accuracy)
 
 
 if __name__ == '__main__':

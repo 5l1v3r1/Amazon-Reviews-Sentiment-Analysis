@@ -11,13 +11,13 @@ dataset = pd.read_csv('dataset/foods.csv', sep=";", quotechar="|", encoding='ISO
 
 manager = multiprocessing.Manager()
 data = manager.list()
-print type(data)
+print(type(data))
 
 stop_words = stopwords.words('english')
 
 
 def cleanup_data(data_chunk):
-    print "Cleanup started."
+    print("Cleanup started.")
     for i in range(data_chunk.shape[0]):
         text = data_chunk.iloc[i, 6]
 
@@ -37,7 +37,7 @@ def cleanup_data(data_chunk):
         global data
         data.append(tmp_text)
         if i % 10000 == 0:
-            print multiprocessing.current_process(), " ", i
+            print(multiprocessing.current_process(), " ", i)
 
 
 # clean the data with 8 processes
@@ -56,12 +56,12 @@ def cleanup_data_mp():
 
 
 def generate_clean_file(chunk, begin, end):
-    print "Started", multiprocessing.current_process()
+    print("Started", multiprocessing.current_process())
     chunk_copy = chunk.copy()
     for i in range(begin, end):
         chunk_copy.loc[i, 6] = data[i]
     pd.DataFrame(chunk_copy).to_csv("/Users/boran/Documents/CS464_Project/dataset/foods_clean%s.csv" % begin, sep=";", quotechar="|", quoting=csv.QUOTE_NONNUMERIC)
-    print "generated ", multiprocessing.current_process()
+    print("generated ", multiprocessing.current_process())
 
 
 def generate_clean_file_mp():
