@@ -14,21 +14,21 @@ dataset = pd.read_csv('dataset/foods_clean.csv', sep=";", quotechar="|", encodin
 
 
 def balance():
-    print dataset[dataset['rating'] == 5.0].shape[0]
-    print dataset[dataset['rating'] == 4.0].shape[0]
+    print(dataset[dataset['rating'] == 5.0].shape[0])
+    print(dataset[dataset['rating'] == 4.0].shape[0])
     class_positive = dataset[dataset['rating'] == 5.0]
     class_positive = class_positive.append(dataset[dataset['rating'] == 4.0], ignore_index=True)
-    print class_positive.shape[0]
+    print(class_positive.shape[0])
 
     class_negative = dataset[dataset['rating'] == 1.0]
     class_negative = class_negative.append(dataset[dataset['rating'] == 2.0], ignore_index=True)
     class_negative = class_negative.append(dataset[dataset['rating'] == 3.0], ignore_index=True)
 
     positive_under = class_positive.sample(class_negative.shape[0])
-    print positive_under.shape[0]
-    print class_negative.shape[0]
+    print(positive_under.shape[0])
+    print(class_negative.shape[0])
     df_test_under = pd.concat([positive_under, class_negative], axis=0)
-    print df_test_under.shape[0]
+    print(df_test_under.shape[0])
     return df_test_under
 
 
@@ -61,12 +61,12 @@ def run_naive_bayes():
     # Confusion matrix
 
     cm = confusion_matrix(y_test, y_pred)
-    print cm
+    print(cm)
     cr = classification_report(y_test, y_pred)
-    print cr
+    print(cr)
 
     accuracy = accuracy_score(y_test, y_pred)
-    print accuracy
+    print(accuracy)
 
 
 if __name__ == '__main__':
@@ -77,6 +77,6 @@ if __name__ == '__main__':
             p += 1
         else:
             n += 1
-    print p
-    print n
+    print(p)
+    print(n)
     run_naive_bayes()
