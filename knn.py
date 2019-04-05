@@ -32,41 +32,32 @@ def balance():
     return df_test_under
 
 
-def run_naive_bayes():
+def run_knn():
+    # https://www.youtube.com/watch?v=s-9Qqpv2hTY
 
     data = balance()
-
+    
     # creating the feature matrix
     matrix = CountVectorizer(max_features=1000)
-    X = matrix.fit_transform(data.iloc[:, -1].astype('U')).toarray()
-    data.ix[:, 4] = data.ix[:, 4].apply(pd.to_numeric)
-    y_tmp = data.iloc[:, 4]
-    y = []
-    for idx, val in y_tmp.iteritems():
-        if val == 4.0 or val == 5.0:
-            y.append("positive")
-        elif val == 1.0 or val == 2.0 or val == 3.0:
-            y.append("negative")
+    X = matrix.fit_transform(data.values.astype('U')).toarray()
+    dataset.ix[:, 4] = dataset.ix[:, 4].apply(pd.to_numeric)
+    y = dataset.iloc[:, 4]
 
-    # split train and test data
-    X_train, X_test, y_train, y_test = train_test_split(X, y)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size =.33)
+    positive_under = class_positive.sample(class_negative.shape[0])
+    print(positive_under.shape[0])
+    print(class_negative.shape[0])
+    df_test_under = pd.concat([positive_under, class_negative], axis=0)
+    print(df_test_under.shape[0])
+    return df_test_under
 
-    # Naive Bayes
-    classifier = GaussianNB()
-    classifier.fit(X_train, y_train)
+    clf = KNeighborsClassifier()
+    clf.fit(X_train, y_train)
 
-    # predict class
-    y_pred = classifier.predict(X_test)
+    y_expect = y_test
+    y_pred = clf.predict(X_test)
 
-    # Confusion matrix
-
-    cm = confusion_matrix(y_test, y_pred)
-    print(cm)
-    cr = classification_report(y_test, y_pred)
-    print(cr)
-
-    accuracy = accuracy_score(y_test, y_pred)
-    print(accuracy)
+    print ( metrics.classification_report(y_expect, y_pred))
 
 
 if __name__ == '__main__':
@@ -79,4 +70,4 @@ if __name__ == '__main__':
             n += 1
     print(p)
     print(n)
-    run_naive_bayes()
+    run_knn()
