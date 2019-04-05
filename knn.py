@@ -2,6 +2,7 @@ import pandas as pd
 from sklearn import metrics
 
 from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.metrics import accuracy_score, confusion_matrix
 
 from sklearn.model_selection import train_test_split
 
@@ -40,7 +41,6 @@ def run_knn():
     # creating the feature matrix
     matrix = CountVectorizer(max_features=1000)
     X = matrix.fit_transform(data.iloc[:, -1].astype('U')).toarray()
-    data.iloc[:, 4] = data.iloc[:, 4].apply(pd.to_numeric)
     y_tmp = data.iloc[:, 4]
     y = []
     for idx, val in y_tmp.iteritems():
@@ -52,13 +52,15 @@ def run_knn():
     # split train and test data
     X_train, X_test, y_train, y_test = train_test_split(X, y)
 
-    clf = KNeighborsClassifier()
+    clf = KNeighborsClassifier(n_neighbors=3, n_jobs=-1)
     clf.fit(X_train, y_train)
+    print("knn fit")
 
-    y_expect = y_test
     y_pred = clf.predict(X_test)
 
-    print(metrics.classification_report(y_expect, y_pred))
+    print(confusion_matrix(y_test, y_pred))
+    print(metrics.classification_report(y_test, y_pred))
+    print(accuracy_score(y_test, y_pred))
 
 
 if __name__ == '__main__':
