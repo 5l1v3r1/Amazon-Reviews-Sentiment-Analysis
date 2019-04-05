@@ -39,7 +39,7 @@ def run_naive_bayes():
     # creating the feature matrix
     matrix = CountVectorizer(max_features=1000)
     X = matrix.fit_transform(data.iloc[:, -1].astype('U')).toarray()
-    data.ix[:, 4] = data.ix[:, 4].apply(pd.to_numeric)
+    data.iloc[:, 4] = data.iloc[:, 4].apply(pd.to_numeric)
     y_tmp = data.iloc[:, 4]
     y = []
     for idx, val in y_tmp.iteritems():
