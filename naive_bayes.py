@@ -8,9 +8,29 @@ from sklearn.naive_bayes import GaussianNB
 
 from sklearn.metrics import confusion_matrix, classification_report, accuracy_score
 
+from sklearn.neighbors.nearest_centroid import NearestCentroid
+
 dataset = pd.read_csv('dataset/foods_clean.csv', sep=";", quotechar="|", encoding='ISO-8859-1')
 
 data = dataset.iloc[:, -1]
+
+
+def run_knn(): #https://www.youtube.com/watch?v=s-9Qqpv2hTY
+    # creating the feature matrix
+    matrix = CountVectorizer(max_features=1000)
+    X = matrix.fit_transform(data.values.astype('U')).toarray()
+    dataset.ix[:, 4] = dataset.ix[:, 4].apply(pd.to_numeric)
+    y = dataset.iloc[:, 4]
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size =.33)
+
+    clf = KNeighborsClassifier()
+    clf.fit(X_train, y_train)
+
+    y_expect=y_test
+    y_pred = clf.predict(X_test)
+
+    print ( metrics.classification_report(y_expect, y_pred))
 
 
 def run_naive_bayes():
