@@ -7,4 +7,4 @@ if __name__ == "__main__":
     X_train, X_test, y_train, y_test = split_train_test(data)
 
     run_naive_bayes(X_train, X_test, y_train, y_test)
-    # run_knn(data)
+    # run_knn(X_train, X_test, y_train, y_test)
