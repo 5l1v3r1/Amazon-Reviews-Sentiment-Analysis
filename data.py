@@ -18,8 +18,8 @@ def get_data_frame():
     class_negative = class_negative.append(dataset[dataset['rating'] == 2.0], ignore_index=True)
     class_negative = class_negative.append(dataset[dataset['rating'] == 3.0], ignore_index=True)
 
-    # under sample positive class randomly with the size of negative class
-    positive_under = class_positive.sample(class_negative.shape[0])
+    # under sample positive class randomly with the 2 times size of negative class
+    positive_under = class_positive.sample(class_negative.shape[0] * 2)
     # concatenate negative and new under sampled positive class
     df_test_under = pd.concat([positive_under, class_negative], axis=0)
 
@@ -31,6 +31,7 @@ def split_train_test(data):
     matrix = CountVectorizer(max_features=1000)
     X = matrix.fit_transform(data.iloc[:, -1].astype('U')).toarray()
     y_tmp = data.iloc[:, 4]
+
     y = []
     for idx, val in y_tmp.iteritems():
         if val == 4.0 or val == 5.0:
