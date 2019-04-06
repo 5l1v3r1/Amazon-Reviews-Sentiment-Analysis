@@ -19,7 +19,7 @@ def run_linear_regression(X_train, X_test, y_train, y_test):
     y_train_f = y_to_float(y_train)
     y_test_f = y_to_float(y_test)
 
-    regr = LinearRegression()
+    regr = LinearRegression(n_jobs=-1)
     regr.fit(X_train, y_train_f)
 
     y_pred = regr.predict(X_test)
