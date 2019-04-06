@@ -41,3 +41,16 @@ def split_train_test(data):
 
     # split train and test data
     return train_test_split(X, y)
+
+
+# linear/logistic regression and random forest accepts numeric
+# so prediction vector y changed as 0/1
+def y_to_float(y):
+    y_float = []
+    for val in y:
+        if val == "positive":
+            y_float.append(1)
+        elif val == "negative":
+            y_float.append(0)
+
+    return y_float

@@ -1,18 +1,6 @@
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import confusion_matrix, classification_report, accuracy_score
-
-
-# linear regression accepts numeric
-# so prediction vector y changed as 0/1
-def y_to_float(y):
-    y_float = []
-    for val in y:
-        if val == "positive":
-            y_float.append(1)
-        elif val == "negative":
-            y_float.append(0)
-
-    return y_float
+from data import y_to_float
 
 
 def run_linear_regression(X_train, X_test, y_train, y_test):
