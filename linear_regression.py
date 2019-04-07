@@ -11,8 +11,9 @@ def run_linear_regression(X_train, X_test, y_train, y_test):
     regr.fit(X_train, y_train_f)
 
     y_pred = regr.predict(X_test)
+    y_pred = y_pred.round().astype(int)
 
     print("LINEAR REGRESSION")
-    print(confusion_matrix(y_test_f, y_pred.round()))
-    print(classification_report(y_test_f, y_pred.round()))
-    print(accuracy_score(y_test_f, y_pred.round()))
+    print(confusion_matrix(y_test_f, y_pred))
+    print(classification_report(y_test_f, y_pred))
+    print(accuracy_score(y_test_f, y_pred))
