@@ -18,8 +18,8 @@ def get_data_frame():
     class_negative = class_negative.append(dataset[dataset['rating'] == 2.0], ignore_index=True)
     class_negative = class_negative.append(dataset[dataset['rating'] == 3.0], ignore_index=True)
 
-    # under sample positive class randomly with the 2 times size of negative class
-    positive_under = class_positive.sample(class_negative.shape[0] * 2)
+    # under sample positive class randomly with the size of negative class
+    positive_under = class_positive.sample(class_negative.shape[0])
     # concatenate negative and new under sampled positive class
     df_test_under = pd.concat([positive_under, class_negative], axis=0)
 
