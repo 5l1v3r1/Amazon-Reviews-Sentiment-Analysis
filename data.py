@@ -4,9 +4,9 @@ from sklearn.model_selection import train_test_split
 
 
 def get_data_frame():
-    dataset = pd.read_csv('dataset/foods_clean.csv', sep=";", quotechar="|", encoding='ISO-8859-1',
-                          names=['idx', 'productid', 'userid', 'helpfulness', 'rating', 'time', 'summary',
-                                 'text', 'cleantext'],
+    dataset = pd.read_csv('dataset/foods.csv', sep=";", quotechar="|", encoding='ISO-8859-1',
+                          names=['productid', 'userid', 'helpfulness', 'rating', 'time', 'summary',
+                                 'text'],
                           header=None)
 
     # get positive class
@@ -28,9 +28,9 @@ def get_data_frame():
 
 def split_train_test(data):
     # creating the feature matrix
-    matrix = CountVectorizer(max_features=1000)
+    matrix = CountVectorizer(max_features=1000, stop_words="english")
     X = matrix.fit_transform(data.iloc[:, -1].astype('U')).toarray()
-    y_tmp = data.iloc[:, 4]
+    y_tmp = data.iloc[:, 3]
 
     y = []
     for idx, val in y_tmp.iteritems():
