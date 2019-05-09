@@ -16,6 +16,6 @@ if __name__ == "__main__":
     #run_gaussianNB(X_train, X_test, y_train, y_test)
     #run_multinomialNB(X_train, X_test, y_train, y_test)
     #run_bernoulliNB(X_train, X_test, y_train, y_test)
-    # run_knn(X_train, X_test, y_train, y_test)
+    run_knn(X_train, X_test, y_train, y_test)
     # run_linear_regression(X_train, X_test, y_train, y_test)
-    run_logistic_regression(X_train, X_test, y_train, y_test)
+    # run_logistic_regression(X_train, X_test, y_train, y_test)
