@@ -55,8 +55,7 @@ def run_gaussianNB(X_train, X_test, y_train, y_test):
 
     # plot_learning_curve(classifier, "Gaussian Naive Bayes Learning Curve", X_train, y_train_f, ylim=(0.6, 1.01), cv=5, n_jobs=-1)
     # plot_roc_curve("Gaussian Naive Bayes ROC Curve", y_test_f, classifier.predict_proba(X_test)[:, 1])
-    plot_pr_curve("Gaussian Naive Bayes Precision Recall Curve", y_test_f, y_pred,
-                  classifier.predict_proba(X_test)[:, 1])
+    #plot_pr_curve("Gaussian Naive Bayes Precision Recall Curve", y_test_f, y_pred, classifier.predict_proba(X_test)[:, 1])
 
 
 def run_multinomialNB(X_train, X_test, y_train, y_test):
@@ -77,7 +76,7 @@ def run_multinomialNB(X_train, X_test, y_train, y_test):
 
     # plot_learning_curve(classifier, "Multinomial Naive Bayes Learning Curve", X_train, y_train_f, ylim=(0.6, 1.01), cv=5, n_jobs=-1)
     # plot_roc_curve("Multinomial Naive Bayes ROC Curve", y_test_f, classifier.predict_proba(X_test)[:, 1])
-    plot_pr_curve("Multinomial Naive Bayes Precision Recall Curve", y_test_f, y_pred, classifier.predict_proba(X_test)[:, 1])
+    #plot_pr_curve("Multinomial Naive Bayes Precision Recall Curve", y_test_f, y_pred, classifier.predict_proba(X_test)[:, 1])
 
 
 def run_bernoulliNB(X_train, X_test, y_train, y_test):
@@ -97,5 +96,5 @@ def run_bernoulliNB(X_train, X_test, y_train, y_test):
 
     # plot_learning_curve(classifier, "Bernoulli Naive Bayes Learning Curve", X_train, y_train_f, ylim=(0.6, 1.01), cv=5, n_jobs=-1)
     # plot_roc_curve("Bernoulli Naive Bayes ROC Curve", y_test_f, classifier.predict_proba(X_test)[:, 1])
-    plot_pr_curve("Bernoulli Naive Bayes Precision Recall Curve", y_test_f, y_pred, classifier.predict_proba(X_test)[:, 1])
+    #plot_pr_curve("Bernoulli Naive Bayes Precision Recall Curve", y_test_f, y_pred, classifier.predict_proba(X_test)[:, 1])
 

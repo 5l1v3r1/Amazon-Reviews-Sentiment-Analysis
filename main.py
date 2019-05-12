@@ -18,12 +18,12 @@ if __name__ == "__main__":
     # Uncomment the algorithms to run as you wish
     # be careful with knn it is too slow.
 
-    run_gaussianNB(X_train, X_test, y_train, y_test)
-    run_multinomialNB(X_train, X_test, y_train, y_test)
-    run_bernoulliNB(X_train, X_test, y_train, y_test)
+    #run_gaussianNB(X_train, X_test, y_train, y_test)
+    #run_multinomialNB(X_train, X_test, y_train, y_test)
+    #run_bernoulliNB(X_train, X_test, y_train, y_test)
     #run_knn(X_train, X_test, y_train, y_test)
     #run_linear_regression(X_train, X_test, y_train, y_test)
-    #run_logistic_regression(X_train, X_test, y_train, y_test)
+    run_logistic_regression(X_train, X_test, y_train, y_test)
     #run_svm(X_train, X_test, y_train, y_test)
     #run_random_forest(X_train, X_test, y_train, y_test)
     #run_decision_tree(X_train, X_test, y_train, y_test)

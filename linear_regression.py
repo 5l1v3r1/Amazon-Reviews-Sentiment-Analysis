@@ -1,8 +1,9 @@
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import confusion_matrix, classification_report, accuracy_score, mean_squared_error, r2_score
 from data import y_to_float
-import matplotlib.pyplot as plt
 
+
+#https://towardsdatascience.com/why-linear-regression-is-not-suitable-for-binary-classification-c64457be8e28
 
 def run_linear_regression(X_train, X_test, y_train, y_test):
     y_train_f = y_to_float(y_train)
@@ -20,7 +21,7 @@ def run_linear_regression(X_train, X_test, y_train, y_test):
     print(accuracy_score(y_test_f, y_pred))
 
     # The coefficients
-    print('Coefficients: \n', regr.coef_)
+    #print('Coefficients: \n', regr.coef_)
     # The mean squared error
     print("Mean squared error: %.2f"
           % mean_squared_error(y_test_f, y_pred))
