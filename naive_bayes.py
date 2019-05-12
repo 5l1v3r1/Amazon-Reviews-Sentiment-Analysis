@@ -1,14 +1,17 @@
 from sklearn.feature_extraction.text import TfidfTransformer
+from sklearn.model_selection import learning_curve
 from sklearn.naive_bayes import GaussianNB, MultinomialNB, BernoulliNB
 
 from sklearn.metrics import confusion_matrix, classification_report, accuracy_score, precision_recall_curve, \
     average_precision_score
 import matplotlib.pyplot as plt
 from sklearn.utils.fixes import signature
+import numpy as np
 
 from data import y_to_float
+from plot import plot_learning_curve, plot_roc_curve, plot_pr_curve
 
-
+'''
 def plot(y_test_f, y_pred):
     precision, recall, _ = precision_recall_curve(y_test_f, y_pred)
     print("Precision: ", precision)
@@ -30,6 +33,7 @@ def plot(y_test_f, y_pred):
     plt.title('2-class Precision-Recall curve: AP={0:0.2f}'.format(
         average_precision))
     plt.show()
+'''
 
 
 def run_gaussianNB(X_train, X_test, y_train, y_test):
@@ -49,7 +53,10 @@ def run_gaussianNB(X_train, X_test, y_train, y_test):
     print(classification_report(y_test_f, y_pred))
     print(accuracy_score(y_test_f, y_pred))
 
-    plot(y_test_f, y_pred)
+    # plot_learning_curve(classifier, "Gaussian Naive Bayes Learning Curve", X_train, y_train_f, ylim=(0.6, 1.01), cv=5, n_jobs=-1)
+    # plot_roc_curve("Gaussian Naive Bayes ROC Curve", y_test_f, classifier.predict_proba(X_test)[:, 1])
+    plot_pr_curve("Gaussian Naive Bayes Precision Recall Curve", y_test_f, y_pred,
+                  classifier.predict_proba(X_test)[:, 1])
 
 
 def run_multinomialNB(X_train, X_test, y_train, y_test):
@@ -68,17 +75,27 @@ def run_multinomialNB(X_train, X_test, y_train, y_test):
     print(classification_report(y_test_f, y_pred))
     print(accuracy_score(y_test_f, y_pred))
 
-    plot(y_test_f, y_pred)
+    # plot_learning_curve(classifier, "Multinomial Naive Bayes Learning Curve", X_train, y_train_f, ylim=(0.6, 1.01), cv=5, n_jobs=-1)
+    # plot_roc_curve("Multinomial Naive Bayes ROC Curve", y_test_f, classifier.predict_proba(X_test)[:, 1])
+    plot_pr_curve("Multinomial Naive Bayes Precision Recall Curve", y_test_f, y_pred, classifier.predict_proba(X_test)[:, 1])
 
 
 def run_bernoulliNB(X_train, X_test, y_train, y_test):
+    y_train_f = y_to_float(y_train)
+    y_test_f = y_to_float(y_test)
+
     classifier = BernoulliNB()
-    classifier.fit(X_train, y_train)
+    classifier.fit(X_train, y_train_f)
 
     y_pred = classifier.predict(X_test)
 
     # Confusion matrix
     print("BERNOULLI NAIVE BAYES")
-    print(confusion_matrix(y_test, y_pred))
-    print(classification_report(y_test, y_pred))
-    print(accuracy_score(y_test, y_pred))
+    print(confusion_matrix(y_test_f, y_pred))
+    print(classification_report(y_test_f, y_pred))
+    print(accuracy_score(y_test_f, y_pred))
+
+    # plot_learning_curve(classifier, "Bernoulli Naive Bayes Learning Curve", X_train, y_train_f, ylim=(0.6, 1.01), cv=5, n_jobs=-1)
+    # plot_roc_curve("Bernoulli Naive Bayes ROC Curve", y_test_f, classifier.predict_proba(X_test)[:, 1])
+    plot_pr_curve("Bernoulli Naive Bayes Precision Recall Curve", y_test_f, y_pred, classifier.predict_proba(X_test)[:, 1])
+

@@ -2,7 +2,6 @@ from sklearn import svm
 from sklearn.metrics import confusion_matrix, classification_report, accuracy_score
 
 from data import y_to_float
-from naive_bayes import plot
 
 
 def run_svm(X_train, X_test, y_train, y_test):
