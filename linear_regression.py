@@ -28,9 +28,11 @@ def run_linear_regression(X_train, X_test, y_train, y_test):
     # Explained variance score: 1 is perfect prediction
     print('Variance score: %.2f' % r2_score(y_test_f, y_pred))
 
+    '''
     fig, ax = plt.subplots()
     ax.scatter(y_test_f, y_pred)
     ax.plot([min(y_test_f), max(y_test_f)], [min(y_pred), max(y_pred)], 'k--', lw=4)
     ax.set_xlabel('measured')
     ax.set_ylabel('predicted')
     plt.show()
+    '''
